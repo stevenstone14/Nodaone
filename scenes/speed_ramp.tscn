@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scenes/speed_ramp.gd" id="1_script"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ramp"]
+size = Vector3(3, 0.3, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ramp"]
+size = Vector3(3, 0.3, 3)
+
+[node name="SpeedRamp" type="Area3D"]
+collision_layer = 16
+collision_mask = 2
+monitoring = true
+script = ExtResource("1_script")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_ramp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ramp")

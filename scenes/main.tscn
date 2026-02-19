@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://bmuk4xnqkq0ic"]
+
+[ext_resource type="PackedScene" uid="uid://dgwhaefvcnvch" path="res://scenes/environment.tscn" id="1_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://bk1exu1p74wrs" path="res://addons/GoldGdt/Pawn.tscn" id="2_sugp2"]
+[ext_resource type="PackedScene" uid="uid://bpyiwsvlv3gi3" path="res://scenes/target_spawner.tscn" id="3_sugp2"]
+[ext_resource type="PackedScene" path="res://scenes/speed_ramp.tscn" id="4_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://cbase00000001" path="res://scenes/base.tscn" id="5_base1"]
+[ext_resource type="PackedScene" uid="uid://cbasehud00001" path="res://scenes/base_hud.tscn" id="6_bhud1"]
+[ext_resource type="PackedScene" uid="uid://cwavemgr00001" path="res://scenes/wave_manager.tscn" id="7_wavem"]
+[ext_resource type="PackedScene" path="res://scenes/heal_station.tscn" id="8_heals"]
+[ext_resource type="Script" uid="uid://d3jrjuord5iah" path="res://scripts/player_spawner.gd" id="9_pspwn"]
+
+[node name="Main" type="Node3D" unique_id=849964310]
+
+[node name="Environment" parent="." unique_id=190209310 instance=ExtResource("1_0wfyh")]
+
+[node name="Pawn" parent="." unique_id=1722767706 instance=ExtResource("2_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8011088, 0)
+shoot_cooldown = 1.5
+
+[node name="TargetSpawner" parent="." unique_id=488019466 instance=ExtResource("3_sugp2")]
+transform = Transform3D(-0.30330148, 0.9528947, 0, -0.9528947, -0.30330148, 0, 0, 0, 1, -49.114994, 5.6890945, -9.492434)
+spawn_interval = 3.0
+target_speed = 8.0
+spawn_height_max = 22.545
+
+[node name="SpeedRamp" parent="." unique_id=896202715 instance=ExtResource("4_jyhfs")]
+transform = Transform3D(0.40874466, 0.5415573, 0.73460424, -1.4026285e-08, 0.8049144, -0.5933907, -0.91264874, 0.24254526, 0.3290046, 0, 1.5505228, -14.017678)
+
+[node name="SpeedRamp2" parent="." unique_id=833707218 instance=ExtResource("4_jyhfs")]
+transform = Transform3D(0.985704, -0.12864354, -0.10880348, -0.0021156745, 0.6362722, -0.7714616, 0.1684722, 0.7606633, 0.62690413, -93.80501, 1.5505228, -44.50561)
+
+[node name="SpeedRamp8" parent="." unique_id=395609401 instance=ExtResource("4_jyhfs")]
+transform = Transform3D(-0.79634845, 0.46553674, 0.38614088, -0.0021156745, 0.6362722, -0.7714616, -0.60483444, -0.61516935, -0.5057096, 11.137054, 1.5505228, -146.64487)
+
+[node name="SpeedRamp3" parent="." unique_id=2062813300 instance=ExtResource("4_jyhfs")]
+transform = Transform3D(0.8359877, 0.42446238, 0.34778783, -0.0021156745, 0.6362722, -0.7714616, -0.54874396, 0.64419675, 0.5328139, 22.804005, 1.5505228, -44.50561)
+
+[node name="SpeedRamp6" parent="." unique_id=1100470359 instance=ExtResource("4_jyhfs")]
+transform = Transform3D(0.8359877, 0.42446238, 0.34778783, -0.0021156745, 0.6362722, -0.7714616, -0.54874396, 0.64419675, 0.5328139, -37.803043, 1.5505228, -62.503326)
+
+[node name="SpeedRamp7" parent="." unique_id=1971712634 instance=ExtResource("4_jyhfs")]
+transform = Transform3D(-0.79901135, 0.46281576, 0.3839041, -0.002115658, 0.63627213, -0.77146155, -0.6013121, -0.6172191, -0.50740975, -37.803043, 1.5505228, -69.69407)
+
+[node name="SpeedRamp4" parent="." unique_id=592538679 instance=ExtResource("4_jyhfs")]
+transform = Transform3D(0.8359877, 0.42446238, 0.34778783, -0.0021156745, 0.6362722, -0.7714616, -0.54874396, 0.64419675, 0.5328139, 22.804005, 1.5505228, -100.3483)
+
+[node name="SpeedRamp5" parent="." unique_id=679685299 instance=ExtResource("4_jyhfs")]
+transform = Transform3D(0.50759697, -0.664005, -0.5490381, -0.002115658, 0.63627213, -0.77146155, 0.86159194, 0.3927533, 0.32156527, -124.627396, 1.5505228, -100.3483)
+
+[node name="Base" parent="." unique_id=413589751 instance=ExtResource("5_base1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 8, -97.60594)
+hover_height = 8.0
+bounds_min = Vector3(-30, 0, -100)
+bounds_max = Vector3(30, 0, -350)
+min_move_distance = 50.0
+
+[node name="BaseHUD" parent="." unique_id=226165593 instance=ExtResource("6_bhud1")]
+
+[node name="WaveManager" parent="." unique_id=266277694 instance=ExtResource("7_wavem")]
+target_spawner_path = NodePath("../TargetSpawner")
+
+[node name="HealStation1" parent="." unique_id=1797658061 instance=ExtResource("8_heals")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.330803, 0.5, -157.2414)
+
+[node name="HealStation2" parent="." unique_id=2111161276 instance=ExtResource("8_heals")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0.5, -55)
+heal_pool = 30.0
+heal_rate = 12.0
+
+[node name="PlayerSpawner" type="Node" parent="." unique_id=792062049]
+script = ExtResource("9_pspwn")

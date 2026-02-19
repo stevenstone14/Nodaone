@@ -1,0 +1,132 @@
+[gd_scene format=3 uid="uid://cbasehud00001"]
+
+[ext_resource type="Script" path="res://scenes/base_hud.gd" id="1_script"]
+
+[node name="BaseHUD" type="CanvasLayer"]
+script = ExtResource("1_script")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 60.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="HealthLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "BASE HP: 100 / 100"
+horizontal_alignment = 1
+
+[node name="HealthBar" type="ProgressBar" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+max_value = 100.0
+value = 100.0
+show_percentage = false
+
+[node name="WaveInfo" type="HBoxContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -250.0
+offset_top = 10.0
+offset_right = -20.0
+offset_bottom = 70.0
+grow_horizontal = 0
+theme_override_constants/separation = 20
+
+[node name="WaveLabel" type="Label" parent="WaveInfo"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "WAVE: –"
+
+[node name="EnemiesLabel" type="Label" parent="WaveInfo"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "ENEMIES: 0"
+
+[node name="CountdownLabel" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 80.0
+offset_right = 200.0
+offset_bottom = 120.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 28
+text = "NEXT WAVE IN: 5"
+horizontal_alignment = 1
+
+[node name="HealBarContainer" type="VBoxContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -80.0
+offset_right = 150.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 4
+
+[node name="HealPromptLabel" type="Label" parent="HealBarContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.3, 1, 0.4, 1)
+text = "CHANNELING..."
+horizontal_alignment = 1
+
+[node name="HealBar" type="ProgressBar" parent="HealBarContainer"]
+custom_minimum_size = Vector2(300, 14)
+layout_mode = 2
+size_flags_horizontal = 4
+modulate = Color(0.3, 1, 0.4, 1)
+max_value = 50.0
+value = 50.0
+show_percentage = false
+
+[node name="GameOverPanel" type="PanelContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -100.0
+offset_right = 180.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="GameOverPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverPanel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="GameOverLabel" type="Label" parent="GameOverPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "BASE DESTROYED
+You survived 0 waves"
+horizontal_alignment = 1
+
+[node name="RestartButton" type="Button" parent="GameOverPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "RESTART"

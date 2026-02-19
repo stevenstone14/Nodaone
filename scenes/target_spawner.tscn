@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bpyiwsvlv3gi3"]
+
+[ext_resource type="Script" uid="uid://pmw4qr3tjlj4" path="res://scenes/target_spawner.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://dftvaar1c5uw8" path="res://scenes/target.tscn" id="2_uaa7n"]
+
+[node name="TargetSpawner" type="Node3D" unique_id=387847088]
+script = ExtResource("1_script")
+target_scene = ExtResource("2_uaa7n")

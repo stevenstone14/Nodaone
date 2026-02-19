@@ -1,0 +1,225 @@
+[gd_scene format=3 uid="uid://bk1exu1p74wrs"]
+
+[ext_resource type="Script" uid="uid://cy4c762ycdgdk" path="res://addons/GoldGdt/src/GoldGdt_Pawn.gd" id="1_qx48f"]
+[ext_resource type="PackedScene" uid="uid://ctjfow2mkcwfg" path="res://scenes/Rocket.tscn" id="2_fud1l"]
+[ext_resource type="Resource" uid="uid://c770d2068in3p" path="res://addons/GoldGdt/Default.tres" id="2_m0ukv"]
+[ext_resource type="Script" uid="uid://dv1f1n4g01lc4" path="res://addons/GoldGdt/src/GoldGdt_Controls.gd" id="3_sa8ga"]
+[ext_resource type="Script" uid="uid://bnohskqg7o2r5" path="res://addons/GoldGdt/src/GoldGdt_Move.gd" id="4_5gavo"]
+[ext_resource type="Script" uid="uid://cjolyxh2wub4g" path="res://addons/GoldGdt/src/GoldGdt_View.gd" id="5_say2d"]
+[ext_resource type="Script" uid="uid://duaxohxcvssag" path="res://addons/GoldGdt/src/GoldGdt_Body.gd" id="6_k6qi8"]
+[ext_resource type="Script" uid="uid://bwkygbxui4bgs" path="res://addons/GoldGdt/src/GoldGdt_Camera.gd" id="7_3b78s"]
+[ext_resource type="Script" uid="uid://bibvtdii3kjff" path="res://addons/GoldGdt/src/GoldGdt_DebugUI.gd" id="7_vbtkw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j7pn1"]
+size = Vector3(0.813, 1.829, 0.813)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_vbs6i"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_u4rs7"]
+custom_solver_bias = 1.0
+margin = 0.25
+radius = 0.15
+
+[node name="Pawn" type="Node3D" unique_id=2028344017 node_paths=PackedStringArray("View", "Camera")]
+script = ExtResource("1_qx48f")
+View = NodePath("View Control")
+Camera = NodePath("Interpolated Camera")
+rocket_scene = ExtResource("2_fud1l")
+
+[node name="Debug UI" type="Control" parent="." unique_id=1436330836 node_paths=PackedStringArray("Controls", "View", "Body", "GameInfo", "ControlsInfo", "ViewInfo", "BodyInfo")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_stretch_ratio = 0.0
+mouse_filter = 2
+script = ExtResource("7_vbtkw")
+Controls = NodePath("../User Input")
+View = NodePath("../View Control")
+Body = NodePath("../Body")
+GameInfo = NodePath("Game/Info")
+ControlsInfo = NodePath("Controls/Info")
+ViewInfo = NodePath("View Control/Info")
+BodyInfo = NodePath("Body/Info")
+
+[node name="Game" type="Control" parent="Debug UI" unique_id=1443285464]
+anchors_preset = 0
+offset_left = 8.0
+offset_right = 48.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="Debug UI/Game" unique_id=1032820680]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 20
+text = "Game"
+
+[node name="Info" type="Label" parent="Debug UI/Game" unique_id=818250299]
+layout_mode = 0
+offset_top = 28.0
+offset_right = 129.0
+offset_bottom = 85.0
+theme_override_font_sizes/font_size = 12
+text = "Rendering FPS: #
+Physics Tick Rate: #
+Physics Frame Time: #"
+
+[node name="Controls" type="Control" parent="Debug UI" unique_id=1090483777]
+anchors_preset = 0
+offset_left = 8.0
+offset_top = 95.0
+offset_right = 48.0
+offset_bottom = 135.0
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="Debug UI/Controls" unique_id=1645023086]
+layout_mode = 0
+theme_override_font_sizes/font_size = 20
+text = "Controls"
+
+[node name="Info" type="Label" parent="Debug UI/Controls" unique_id=1446181661]
+layout_mode = 0
+offset_top = 28.0
+offset_right = 135.0
+offset_bottom = 145.0
+theme_override_font_sizes/font_size = 12
+text = "Movement Input: (#, #)
+Wish Direction: (#, #, #)
+Wish Speed: #
+Jump Pressed: ?
+Duck Pressed: ?"
+
+[node name="View Control" type="Control" parent="Debug UI" unique_id=175346403]
+anchors_preset = 0
+offset_left = 8.0
+offset_top = 232.0
+offset_right = 48.0
+offset_bottom = 272.0
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="Debug UI/View Control" unique_id=559769510]
+layout_mode = 0
+theme_override_font_sizes/font_size = 20
+text = "View Control"
+
+[node name="Info" type="Label" parent="Debug UI/View Control" unique_id=336129073]
+layout_mode = 0
+offset_top = 28.0
+offset_right = 114.0
+offset_bottom = 65.0
+theme_override_font_sizes/font_size = 12
+text = "View Angles: (#, #, #)
+View Offset: #"
+
+[node name="Body" type="Control" parent="Debug UI" unique_id=386862325]
+anchors_preset = 0
+offset_left = 8.0
+offset_top = 309.0
+offset_right = 48.0
+offset_bottom = 349.0
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="Debug UI/Body" unique_id=1022054184]
+layout_mode = 0
+theme_override_font_sizes/font_size = 20
+text = "Body
+"
+
+[node name="Info" type="Label" parent="Debug UI/Body" unique_id=521373194]
+layout_mode = 0
+offset_top = 28.0
+offset_right = 59.0
+offset_bottom = 65.0
+theme_override_font_sizes/font_size = 12
+text = "Velocity: (#, #, #)
+Speed: # m/s (# u/s)
+Ducking: ?
+Ducked: ?"
+
+[node name="Attribution" type="RichTextLabel" parent="Debug UI" unique_id=1540764024]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = -28.0
+offset_right = 262.0
+offset_bottom = -5.0
+grow_vertical = 0
+theme_override_font_sizes/normal_font_size = 14
+bbcode_enabled = true
+text = "GoldGdt Character Controller
+Copyright (c) 2024 ratmarrow
+"
+fit_content = true
+
+[node name="User Input" type="Node" parent="." unique_id=868797990 node_paths=PackedStringArray("Body", "Move", "View")]
+script = ExtResource("3_sa8ga")
+Parameters = ExtResource("2_m0ukv")
+Body = NodePath("../Body")
+Move = NodePath("../Move Functions")
+View = NodePath("../View Control")
+
+[node name="View Control" type="Node" parent="." unique_id=1920552460 node_paths=PackedStringArray("Body", "horizontal_view", "vertical_view", "camera_mount")]
+script = ExtResource("5_say2d")
+Parameters = ExtResource("2_m0ukv")
+Body = NodePath("../Body")
+horizontal_view = NodePath("../Body/Horizontal View")
+vertical_view = NodePath("../Body/Horizontal View/Vertical View")
+camera_mount = NodePath("../Body/Horizontal View/Vertical View/Camera Mount")
+
+[node name="Move Functions" type="Node" parent="." unique_id=522963632 node_paths=PackedStringArray("Body")]
+script = ExtResource("4_5gavo")
+Parameters = ExtResource("2_m0ukv")
+Body = NodePath("../Body")
+
+[node name="Body" type="CharacterBody3D" parent="." unique_id=2026856270 node_paths=PackedStringArray("View", "collision_hull", "duck_timer")]
+collision_layer = 2
+floor_constant_speed = true
+script = ExtResource("6_k6qi8")
+Parameters = ExtResource("2_m0ukv")
+View = NodePath("../View Control")
+collision_hull = NodePath("Collision Hull")
+duck_timer = NodePath("Duck Timer")
+
+[node name="Collision Hull" type="CollisionShape3D" parent="Body" unique_id=1949147350]
+shape = SubResource("BoxShape3D_j7pn1")
+
+[node name="Duck Timer" type="Timer" parent="Body" unique_id=2139560899]
+
+[node name="Horizontal View" type="Node3D" parent="Body" unique_id=1444803680]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.711, 0)
+
+[node name="Vertical View" type="Node3D" parent="Body/Horizontal View" unique_id=2138103352]
+
+[node name="Camera Mount" type="Marker3D" parent="Body/Horizontal View/Vertical View" unique_id=1111236497]
+gizmo_extents = 0.5
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Body" unique_id=920170346]
+mesh = SubResource("CapsuleMesh_vbs6i")
+
+[node name="Interpolated Camera" type="Node3D" parent="." unique_id=1412393958 node_paths=PackedStringArray("target", "camera_arm", "camera_anchor", "camera")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.711, 0)
+script = ExtResource("7_3b78s")
+Parameters = ExtResource("2_m0ukv")
+target = NodePath("../Body/Horizontal View/Vertical View/Camera Mount")
+camera_arm = NodePath("Arm")
+camera_anchor = NodePath("Arm/Arm Anchor")
+camera = NodePath("Arm/Arm Anchor/Camera")
+
+[node name="Arm" type="SpringArm3D" parent="Interpolated Camera" unique_id=499034191]
+shape = SubResource("SphereShape3D_u4rs7")
+spring_length = 0.0
+margin = 0.1
+
+[node name="Arm Anchor" type="Node3D" parent="Interpolated Camera/Arm" unique_id=1842190657]
+editor_description = "
+"
+
+[node name="Camera" type="Camera3D" parent="Interpolated Camera/Arm/Arm Anchor" unique_id=1611181845]
+fov = 105.0
+near = 0.001
